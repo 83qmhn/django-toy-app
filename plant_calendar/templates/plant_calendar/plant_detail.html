@@ -1,0 +1,6 @@
+{% extends 'plant_calendar/base.html' %}
+
+{% block content %}
+    <p><strong>Name</strong>:  {{ plant.name }}</p>
+    <p><strong>Best Season To Plant</strong>:  {{ plant.get_best_season_to_plant_display}}</p>
+{% endblock %}

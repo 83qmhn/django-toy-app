@@ -70,11 +70,11 @@ class PlantCalendar(models.Model):
     SUNLIGHT_CHOICES = {
         "FS":  "Full Sun",
         "PS": "Partially Shaded",
-        "NS": "No SUN",
+        "NS": "No Sun",
     }
     plant_spot_sunlight_condition = models.CharField(max_length=2, choices=SUNLIGHT_CHOICES)
 
-    def add(self): 
+    def add(self):
         self.save()
 
     # TODO: search for showing the name of plant

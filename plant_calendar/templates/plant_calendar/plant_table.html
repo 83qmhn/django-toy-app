@@ -1,0 +1,26 @@
+{% extends 'plant_calendar/base.html' %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th class="px-2">Plant Name</th>
+            <th class="px-2">Fertiliser</th>
+            <th class="px-2">Sun Light Condition</th>
+            <th class="px-2">Plant Date</th>
+            <th class="px-2">Harvest Date</th>
+            <th></th>
+        </tr>
+
+        {% for plant in planted_plants%}
+        <tr>
+            <td class="px-2"><a href="{% url 'plant_detail' pk=plant.pk %}">{{ plant.plant_name }}</a></td>
+            <td class="px-2">{{ plant.get_fertiliser_display }}</td>
+            <td class="px-2">{{ plant.get_plant_spot_sunlight_condition_display }}</td>
+            <td class="px-2">{{ plant.plant_date }}</td>
+            <td class="px-2">{{ plant.harvest_date }}</td>
+            <td class="px-2"><a href="{% url 'edit_plant_record' pk=plant.pk %}">Edit record</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
