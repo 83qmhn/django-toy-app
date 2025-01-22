@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
@@ -7,6 +7,10 @@ from django.shortcuts import redirect
 from .forms import PlantForm, PlantRecordForm
 
 # Create your views here.https://docs.djangoproject.com/en/5.1/topics/http/views/
+
+
+def index(request):
+    return render(request, "plant_calendar/index.html")
 
 def plant_table(request):
     planted_plants = PlantCalendar.objects.filter(plant_date__lte=timezone.now()).order_by('plant_date')
@@ -41,23 +45,26 @@ def add_record(request):
         if form.is_valid():
             plant = form.save()
             plant.save()
-            url = reverse("plant_table")
-            return redirect(url)
+            return HttpResponse(status=204, headers={'HX-Trigger': 'plantRecordAdded'})
     else:
         form = PlantRecordForm()
-        return render(request, 'plant_calendar/add_plant_record.html', {'form': form})
+    return render(request, 'plant_calendar/add_plant_record.html', {'form': form})
 
 def plant_record(request, pk):
     record = get_object_or_404(PlantCalendar, pk=pk)
     if request.method == "POST":
         form = PlantRecordForm(request.POST, instance=record) #remember adding the instance!!!
         if form.is_valid():
-            record = form.save()
             record.save()
-            url = reverse("plant_table")
-            return redirect(url)
+            # return an empty response with the appropriate status code
+            # 'plantTableChanged' is the event name that triggers table content to update
+            return HttpResponse(status=204, headers={'HX-Trigger': 'plantTableChanged'})
     else:
-        form = PlantRecordForm(instance=record)
-        return render(request, 'plant_calendar/edit_plant_record.html', {'form': form})
+        form = PlantRecordForm(instance=record)  
+    return render(request, 'plant_calendar/edit_plant_record.html', {'form': form})
 
-
+def delete_plant_record(request, pk):
+    #record = get_object_or_404(PlantCalendar, pk=pk)
+    record = PlantCalendar.objects.get(pk=pk)
+    record.delete()
+    return HttpResponse(status=204, headers={'HX-Trigger': 'plantRecordDeleted'})

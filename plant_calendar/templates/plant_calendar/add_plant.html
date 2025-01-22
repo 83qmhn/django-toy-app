@@ -1,9 +1,7 @@
-{% extends 'plant_calendar/base.html' %}
+{% load static %}
 
-{% block content %}
-    <h2> New Plant </h2>
-    <form method="post"> {% csrf_token %}
-        {{ form.as_p }}       
-    <button type="submit" class="btn btn-secondary">Save</button>
-    </form>
-{% endblock %}
+<h2>New Plant</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="btn btn-secondary">Save</button>
+</form>

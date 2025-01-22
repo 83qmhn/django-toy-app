@@ -1,9 +1,9 @@
-{% extends 'plant_calendar/base.html' %}
-
-{% block content %}
-    <h2> New Plant Record</h2>
-    <form method="post"> {% csrf_token %}
-        {{ form.as_p }}       
-    <button type="submit" class="btn btn-secondary">Save</button>
-    </form>
-{% endblock %}
+<form
+  hx-post="{{ request.path }}"
+  hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
+>
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-secondary">Save</button>
+  <button class="btn">Cancel</button>
+</form>
+</div>
