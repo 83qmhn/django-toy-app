@@ -24,6 +24,7 @@
       class="btn btn-primary"
       hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
       hx-delete="{% url 'delete_plant_record' pk=plant.pk %}"
+      hx-prompt="Are you sure you want to delete this record?"
       hx-disabled-elt="this"
     >
       Delete record
