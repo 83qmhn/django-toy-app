@@ -17,5 +17,6 @@ class PlantRecordForm(forms.ModelForm):
         model = PlantCalendar
         fields = ('plant_name', 'plant_date', 'fertiliser', 'plant_spot_sunlight_condition', 'harvest_date')
         widgets={
+            'plant_date': DateInput(),
             "harvest_date": DateInput()
         }

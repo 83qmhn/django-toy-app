@@ -3,7 +3,6 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from .models import Plant, PlantCalendar
-from django.shortcuts import redirect
 from .forms import PlantForm, PlantRecordForm
 
 # Create your views here.https://docs.djangoproject.com/en/5.1/topics/http/views/
@@ -45,7 +44,7 @@ def add_record(request):
         if form.is_valid():
             plant = form.save()
             plant.save()
-            return HttpResponse(status=204, headers={'HX-Trigger': 'plantRecordAdded'})
+            return HttpResponse(status=204, headers={'HX-Trigger': 'plantRecordAdded', 'HX-Redirect': ""})
     else:
         form = PlantRecordForm()
     return render(request, 'plant_calendar/add_plant_record.html', {'form': form})

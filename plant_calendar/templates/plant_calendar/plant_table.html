@@ -22,7 +22,6 @@
       type="button btn-small"
       class="btn btn-primary"
       hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
-      {% comment %} hx-delete="{{ request.path}}" {% endcomment %}
       hx-delete="{% url 'delete_plant_record' pk=plant.pk %}"
     >
       Delete record
