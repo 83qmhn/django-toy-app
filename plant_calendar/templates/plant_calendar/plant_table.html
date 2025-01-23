@@ -3,6 +3,7 @@
   <td class="px-2">
     <a href="{% url 'plant_detail' pk=plant.pk %}">{{ plant.plant_name }}</a>
   </td>
+  <td class="px-2">{{ plant.best_season_to_plant_display }}</td>
   <td class="px-2">{{ plant.get_fertiliser_display }}</td>
   <td class="px-2">{{ plant.get_plant_spot_sunlight_condition_display }}</td>
   <td class="px-2">{{ plant.plant_date }}</td>
@@ -23,6 +24,7 @@
       class="btn btn-primary"
       hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
       hx-delete="{% url 'delete_plant_record' pk=plant.pk %}"
+      hx-disabled-elt="this"
     >
       Delete record
     </button>

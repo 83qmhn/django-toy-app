@@ -60,14 +60,12 @@
               hx-trigger="load, plantTableChanged from:body, plantRecordAdded from:body, plantRecordDeleted from:body"
               hx-get="{% url 'plant_table' %}"
               hx-target="this"
-              hx-indicator="#loading-spinner"
             >
-              <tr id="loading-spinner">
+             <tr id="loading-spinner">
                 <td class="spinner-border" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </td>
-              </tr>
-            </tbody>
+              </tr> 
           </table>
         </div>
       </div>

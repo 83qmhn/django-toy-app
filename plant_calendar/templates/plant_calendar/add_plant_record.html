@@ -1,9 +1,29 @@
+{# Load the tag library #} {% load django_bootstrap5 %}
+
+<h3>Add New Plant Record</h3>
 <form
+  class="w-50"
   hx-post="{{ request.path }}"
   hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
 >
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-secondary">Save</button>
-  <a href="/" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Cancel</a>
+  {% bootstrap_form form %}
+  <button
+    type="submit"
+    class="btn btn-secondary px-auto"
+    hx-disabled-elt="this"
+    hx-indicator=".htmx-indicator"
+  >
+    <span>Save</span>
+    <span class="htmx-indicator spinner-border spinner-border-sm" aria-hidden="true"></span>
+    <span class="visually-hidden" role="status">Loading...</span>
+  </button>
+
+  <a
+    href="/"
+    class="btn btn-secondary"
+    tabindex="-1"
+    role="button"
+    aria-disabled="true"
+    >Cancel</a
+  >
 </form>
-</div>
